@@ -18,29 +18,18 @@ public class PesananFrame extends JFrame {
     
       private DefaultTableModel tableModel;
 
-     public PesananFrame(String namaPembeli, DefaultTableModel tableModel) {
-        this.tableModel = tableModel;
+    private JTable pesananTable;
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new BorderLayout());
-        setTitle("Pesanan " + namaPembeli);
+    public PesananFrame() {
+        setTitle("Data Pesanan");
         setSize(600, 400);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JTable table = new JTable(tableModel);
-        JScrollPane scroll = new JScrollPane(table);
-        add(scroll, BorderLayout.CENTER);
-
-        JLabel label = new JLabel("Terima kasih telah berbelanja, " + namaPembeli + "!", SwingConstants.CENTER);
-        label.setFont(new Font("Arial", Font.BOLD, 16));
-        add(label, BorderLayout.NORTH);
+        pesananTable = new JTable(CheckoutStorage.pesananModel);
+        JScrollPane scrollPane = new JScrollPane(pesananTable);
+        add(scrollPane);
     }
-    
-    public PesananFrame() {
-    this("Nama Belum Diisi", new DefaultTableModel(
-        new Object[][]{}, new String[]{"ID", "Nama", "Harga", "Qty", "Total"}
-    ));
-}
 
     public void tambahPesanan(String nama, int jumlahItem, double total) {
         tableModel.addRow(new Object[]{nama, jumlahItem, String.format("Rp %,.2f", total)});

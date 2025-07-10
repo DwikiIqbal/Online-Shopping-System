@@ -35,7 +35,9 @@ public class Keranjang1 extends javax.swing.JFrame {
         setSize(600, 400);
         setLocationRelativeTo(null);
         
-        JPanel bottomPanel = new JPanel(new BorderLayout());
+        JPanel bottomPanel = new JPanel();
+bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+
         
         JPanel panelNama = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelNama.add(new JLabel("Nama Pembeli: "));
@@ -46,7 +48,8 @@ public class Keranjang1 extends javax.swing.JFrame {
         // Setel JTable keranjang menggunakan model yang diterima
         cartTable = new JTable(this.tableModel);
         JScrollPane scrollPane = new JScrollPane(cartTable);
-        add(scrollPane, BorderLayout.CENTER);
+    scrollPane.setPreferredSize(new Dimension(550, 150));
+    bottomPanel.add(scrollPane); // tampil di bawah input nama
 
         
         totalLabel = new JLabel("Total: Rp 0.00", SwingConstants.RIGHT);
@@ -102,19 +105,18 @@ public class Keranjang1 extends javax.swing.JFrame {
     // Simulasi: cetak ke konsol atau simpan ke database/file kalau mau
     System.out.println("=== TRANSAKSI DISIMPAN ===\n" + data);
 
-    // Alert berhasil
-    JOptionPane.showMessageDialog(this, "Transaksi berhasil!\nTerima kasih, " + nama + ".", "Checkout Berhasil", JOptionPane.INFORMATION_MESSAGE);
-
-    // ✅ Tambahan: reset isi keranjang dan input nama
-    tableModel.setRowCount(0);              // Hapus semua baris di keranjang
-    namaPembeliField.setText("");           // Kosongkan field nama pembeli
-    updateCartTotal();                      // Refresh label total
+           // Refresh label total
 
     // Pindah ke JFrame Pesanan
-    PesananFrame pesananFrame = new PesananFrame(nama, tableModel);
-    pesananFrame.setVisible(true);
+    CheckoutStorage.simpanPesanan(nama, tableModel);
 
-    dispose();
+// Alert berhasil
+JOptionPane.showMessageDialog(this, "Transaksi berhasil!\nTerima kasih, " + nama + ".", "Checkout Berhasil", JOptionPane.INFORMATION_MESSAGE);
+
+// Reset isi keranjang
+tableModel.setRowCount(0);
+namaPembeliField.setText("");
+updateCartTotal();
 }
      
      

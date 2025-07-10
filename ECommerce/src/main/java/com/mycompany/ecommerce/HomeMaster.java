@@ -163,7 +163,7 @@ public class HomeMaster extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Kategory menu = new Kategory(); // Pastikan class Tes ada dan turunan JFrame
+        Produk menu = new Produk(); // Pastikan class Tes ada dan turunan JFrame
         menu.setVisible(true); // Tampilkan JFrame Tes
         this.dispose(); // Tutup JFrame saat ini
     }//GEN-LAST:event_jButton1ActionPerformed

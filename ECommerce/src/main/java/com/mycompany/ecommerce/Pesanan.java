@@ -15,6 +15,8 @@ import java.util.Set;
 public class Pesanan extends javax.swing.JFrame {
 private DefaultTableModel tableModel;
 private TransactionManager transactionManager;
+
+
     /**
      * Creates new form pesanann
      */
@@ -48,6 +50,9 @@ private TransactionManager transactionManager;
 
     lblTotal.setText("Rp " + String.format("%,.2f", grandTotal));
     }
+    
+    
+
 
     private void printNota() {
         int selectedRow = jTable1.getSelectedRow();
